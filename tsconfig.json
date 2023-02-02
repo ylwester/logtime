@@ -1,6 +1,24 @@
 {
   "extends": "expo/tsconfig.base",
+  "jsx": "react-native",
   "compilerOptions": {
-    "strict": true
-  }
+    "strict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["./*"],
+      "components/*": ["./components/*"],
+      "assets/*": ["./assets/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "additional.d.ts",
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.tsx",
+    "./App.tsx",
+    "./src/**/*",
+    "src/**/*",
+    "src/**/*.*"
+  ]
 }

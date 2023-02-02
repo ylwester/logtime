@@ -1,21 +1,48 @@
-import React from 'react'
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useCallback } from 'react'
+import { StyleSheet, View } from 'react-native'
+import { useFonts } from 'expo-font'
+import * as SplashScreen from 'expo-splash-screen'
+import { ThemeProvider } from '@rneui/themed'
+import { theme } from './theme'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import ScreensHandler from './src/screens'
+
+SplashScreen.preventAutoHideAsync()
 
 const App = () => {
+  const [fontsLoaded] = useFonts({
+    Roboto: require('./src/assets/fonts/Roboto-Regular.ttf'),
+    RobotoBold: require('./src/assets/fonts/Roboto-Bold.ttf'),
+    RobotoLight: require('./src/assets/fonts/Roboto-Light.ttf'),
+    RobotoSemiBold: require('./src/assets/fonts/Roboto-Medium.ttf'),
+    RobotoBlack: require('./src/assets/fonts/Roboto-Black.ttf'),
+  })
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync()
+    }
+  }, [fontsLoaded])
+
+  if (!fontsLoaded) {
+    return null
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme}>
+        <View style={[styles.container]} onLayout={onLayoutRootView}>
+          <ScreensHandler />
+        </View>
+      </ThemeProvider>
+    </SafeAreaProvider>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 })
+
+export default App
