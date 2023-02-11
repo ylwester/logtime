@@ -6,6 +6,7 @@ import { ThemeProvider } from '@rneui/themed'
 import { theme } from './theme'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import ScreensHandler from './src/screens'
+import { NavigationContainer } from '@react-navigation/native'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -29,13 +30,15 @@ const App = () => {
   }
 
   return (
-    <SafeAreaProvider>
-      <ThemeProvider theme={theme}>
-        <View style={[styles.container]} onLayout={onLayoutRootView}>
-          <ScreensHandler />
-        </View>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <SafeAreaProvider>
+        <ThemeProvider theme={theme}>
+          <View style={[styles.container]} onLayout={onLayoutRootView}>
+            <ScreensHandler />
+          </View>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </NavigationContainer>
   )
 }
 

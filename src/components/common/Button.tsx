@@ -9,12 +9,17 @@ type Props = {
   style?: ViewStyle
 } & PressableProps
 
-const StyledButton = ({ children, style, ...props }: Props) => {
+const StyledButton = ({ children, disabled, style, ...props }: Props) => {
   const { theme } = useTheme()
   return (
     <PressableOpacity
+      disabled={disabled}
       style={[
-        { backgroundColor: theme.colors.primary },
+        {
+          backgroundColor: disabled
+            ? theme.colors.disabled
+            : theme.colors.primary,
+        },
         styles.container,
         style,
       ]}

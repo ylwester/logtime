@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TextProps } from 'react-native'
 import React, { ReactNode } from 'react'
+import { useTheme } from '@rneui/themed'
 
 type Props = {
   children: ReactNode
@@ -12,8 +13,12 @@ const StyledText = ({
   style,
   ...rest
 }: Props) => {
+  const { theme } = useTheme()
   return (
-    <Text style={[styles[weight], style]} {...rest}>
+    <Text
+      style={[styles[weight], { color: theme.colors.grey0 }, style]}
+      {...rest}
+    >
       {children}
     </Text>
   )

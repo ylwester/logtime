@@ -4,18 +4,24 @@ import StyledText from 'components/common/styled-text'
 import StyledButton from 'components/common/Button'
 import { useTheme } from '@rneui/themed'
 import { Button } from '@rneui/base'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../index'
 
 // TODO change logo text with logo or add picture instead
-const LoginWelcome = () => {
+
+type Props = NativeStackScreenProps<RootStackParamList, 'Welcome'>
+
+const LoginWelcome = ({ navigation }: Props) => {
   const { theme } = useTheme()
   const { width } = useWindowDimensions()
 
   return (
-    <SafeAreaView
+    <View
       style={{
-        paddingHorizontal: 20,
+        flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: theme.colors.background,
       }}
     >
       <Image
@@ -93,6 +99,9 @@ const LoginWelcome = () => {
           size="sm"
           titleStyle={{
             fontSize: 14,
+          }}
+          onPress={() => {
+            navigation.navigate('Sign up')
           }}
         >
           Sign up
@@ -203,7 +212,7 @@ const LoginWelcome = () => {
           </View>
         </StyledButton>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 
