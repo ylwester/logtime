@@ -67,6 +67,9 @@ const LoginWelcome = ({ navigation }: Props) => {
             alignSelf: 'stretch',
             padding: 20,
           }}
+          onPress={() => {
+            navigation.navigate('Sign in')
+          }}
         >
           <StyledText
             weight="bold"

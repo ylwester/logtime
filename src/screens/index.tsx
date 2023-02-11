@@ -10,7 +10,7 @@ import useAuth from '../hooks/use-auth'
 export type RootStackParamList = {
   'Sign up': undefined
   Welcome: undefined
-  SignIn: undefined
+  'Sign in': undefined
   Home: undefined
 }
 
@@ -32,13 +32,7 @@ const ScreensHandler = () => {
               headerShown: false,
             }}
           />
-          <RootStack.Screen
-            name="SignIn"
-            component={SignIn}
-            options={{
-              headerBackTitleVisible: false,
-            }}
-          />
+          <RootStack.Screen name="Sign in" component={SignIn} />
           <RootStack.Screen name="Sign up" component={SignUp} />
         </RootStack.Group>
       )}

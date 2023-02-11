@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import {
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   onAuthStateChanged,
 } from 'firebase/auth'
 import { auth } from '../../firebase'
@@ -23,11 +24,15 @@ const useAuth = () => {
     return unsubscribeOnAuthStateChanged
   }, [])
 
+  const handleSignIn = useCallback(async ({ email, password }: SignUpProps) => {
+    await signInWithEmailAndPassword(auth, email, password)
+  }, [])
+
   const handleSignUp = useCallback(async ({ email, password }: SignUpProps) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password)
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }, [])
 
@@ -42,6 +47,7 @@ const useAuth = () => {
 
   return {
     user,
+    handleSignIn,
     handleSignUp,
     handleLogout,
   }
