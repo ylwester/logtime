@@ -35,11 +35,7 @@ const SignIn = () => {
   const { handleSignIn } = useAuth()
 
   const onSubmit = async ({ email, password }: SignUpProps) => {
-    try {
-      await handleSignIn({ email, password })
-    } catch (e) {
-      console.error(e)
-    }
+    await handleSignIn({ email, password })
   }
 
   return (
