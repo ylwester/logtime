@@ -3,13 +3,14 @@ import StyledText from 'components/common/styled-text'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import StyledButton from 'components/common/Button'
 import useAuth from '../hooks/use-auth'
+import TasksList from 'components/ tasks/list'
 
 const Home = () => {
   const { handleLogout } = useAuth()
   return (
     <SafeAreaView
       style={{
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
         alignItems: 'center',
       }}
     >
@@ -17,6 +18,7 @@ const Home = () => {
       <StyledButton onPress={handleLogout}>
         <StyledText>Logout</StyledText>
       </StyledButton>
+      <TasksList />
     </SafeAreaView>
   )
 }

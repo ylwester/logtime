@@ -1,17 +1,19 @@
 import LoginWelcome from './auth/login-welcome'
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Home from './home'
 import SignIn from './auth/sign-in'
 import SignUp from './auth/sign-up'
 import useAuth from '../hooks/use-auth'
+import TaskScreen from './task-screen'
 
 export type RootStackParamList = {
   'Sign up': undefined
   Welcome: undefined
   'Sign in': undefined
   Home: undefined
+  TaskScreen: undefined
 }
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
@@ -22,7 +24,10 @@ const ScreensHandler = () => {
   return (
     <RootStack.Navigator initialRouteName="Welcome">
       {user ? (
-        <RootStack.Screen name="Home" component={Home} />
+        <RootStack.Group>
+          <RootStack.Screen name="Home" component={Home} />
+          <RootStack.Screen name="TaskScreen" component={TaskScreen} />
+        </RootStack.Group>
       ) : (
         <RootStack.Group>
           <RootStack.Screen
